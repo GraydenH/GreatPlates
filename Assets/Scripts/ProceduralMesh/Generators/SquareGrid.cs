@@ -6,13 +6,15 @@ using static Unity.Mathematics.math;
 namespace ProceduralMeshes.Generators {
 
 	public struct SquareGrid : IMeshGenerator {
-		public int VertexCount => 4;
+		public int VertexCount => 4 * Resolution * Resolution ;
 
-		public int IndexCount => 6;
+		public int IndexCount => 6 * Resolution * Resolution;
 
-		public int JobLength => 1;
-		
+		public int JobLength => Resolution * Resolution;
+
 		public Bounds Bounds => new Bounds(new Vector3(0.5f, 0.5f), new Vector3(1f, 1f));
+		
+		public int Resolution { get; set; }
 
 		public void Execute<S> (int i, S streams) where S : struct, IMeshStreams {
 			var vertex = new Vertex();
